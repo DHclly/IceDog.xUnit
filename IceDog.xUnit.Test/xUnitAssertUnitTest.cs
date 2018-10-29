@@ -19,6 +19,7 @@ namespace IceDog.xUnit.Test
         }
 
         [Fact(DisplayName = "Test the [Assert.Equal]")]
+        [Trait("category","fruites")]
         public void Equal()
         {
             var first = _fruitList.First();
@@ -26,6 +27,7 @@ namespace IceDog.xUnit.Test
         }
 
         [Fact(DisplayName = "Test the [Assert.NotEqual]")]
+        [Trait("category", "fruites")]
         public void NotEqual()
         {
             var first = _fruitList.First();
@@ -33,6 +35,7 @@ namespace IceDog.xUnit.Test
         }
 
         [Fact(DisplayName = "Test the [Assert.False]")]
+        [Trait("category", "fruites")]
         public void False()
         {
             var first = _fruitList.First();
@@ -40,10 +43,34 @@ namespace IceDog.xUnit.Test
         }
 
         [Fact(DisplayName = "Test the [Assert.True]")]
+        [Trait("category", "beverages")]
         public void True()
         {
             var last = _beverageList.Last();
             Assert.True(last.Discontinued);
+        }
+        private int Divide(int num1, int num2)
+        {
+            return num1 / num2;
+        }
+        /// <summary>
+        /// Xunit并不是通过Attribute来标记异常捕获的，而是直接使用Assert.Throws断言函数来验证异常。
+        /// </summary>
+        [Fact(DisplayName = "Test the [Assert.Throws<DivideByZeroException>]")]
+        public void ThrowsDivideByZeroException()
+        {
+            Assert.Throws<DivideByZeroException>(() => Divide(1, 0));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact(DisplayName = "Test the [Assert.Throws<IndexOutOfRangeException>]")]
+        [Trait("category", "beverages")]
+        public void ThrowsIndexOutOfRangeException()
+        {
+            var last = _beverageList.Last();
+            Assert.Throws<IndexOutOfRangeException>(() =>last.Name[10]);
         }
     }
 }
