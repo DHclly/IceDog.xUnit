@@ -6,12 +6,12 @@ using Xunit;
 
 namespace IceDog.xUnit.Test
 {
-    public class xUnitSelfUnitTest
+    public class xUnitAttributeUnitTest
     {
         private readonly List<Product> _fruitList;
         private readonly List<Product> _beverageList;
 
-        public xUnitSelfUnitTest()
+        public xUnitAttributeUnitTest()
         {
             ProductList _productList = new ProductList();
             _fruitList = _productList.Where(p => p.Category.Equals("Fruits")).ToList();
@@ -49,7 +49,7 @@ namespace IceDog.xUnit.Test
             Assert.Equal(name,first.Name);//make error
         }
 
-        [Theory(DisplayName = "Test the [InlineData]")]
+        [Theory(DisplayName = "Test the [Theory InlineData]")]
         [InlineData("Melon", "Fruits",false)]
         public void InlineDataWithTheory(string name, string category, bool discontinued)
         {
@@ -87,34 +87,6 @@ namespace IceDog.xUnit.Test
             Assert.Equal(name, first.Name);
             Assert.Equal(category, first.Category);
             Assert.Equal(discontinued, first.Discontinued);
-        }
-
-        [Fact(DisplayName = "Test the [Assert.Equal]")]
-        public void Equal()
-        {
-            var first = _fruitList.First();
-            Assert.Equal("Melon",first.Name);
-        }
-
-        [Fact(DisplayName = "Test the [Assert.NotEqual]")]
-        public void NotEqual()
-        {
-            var first = _fruitList.First();
-            Assert.NotEqual("A Melon", first.Name);
-        }
-
-        [Fact(DisplayName = "Test the [Assert.False]")]
-        public void False()
-        {
-            var first = _fruitList.First();
-            Assert.False(first.Discontinued);
-        }
-
-        [Fact(DisplayName = "Test the [Assert.True]")]
-        public void True()
-        {
-            var last = _beverageList.Last();
-            Assert.True(last.Discontinued);
         }
     }
 }
